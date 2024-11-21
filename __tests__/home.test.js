@@ -3,7 +3,7 @@ import Home from "../src/app/page";
 import '@testing-library/jest-dom';
 import {images } from '../constants';
 import { act } from '@testing-library/react';
-
+import Header from "../src/components/Header"
 jest.useFakeTimers();
 
 describe('Home',()=>{
@@ -12,8 +12,16 @@ describe('Home',()=>{
         const img = screen.getByTestId('carousel-imgs');
         expect(img).toBeInTheDocument();
     })
-    it('carousel slides changes after 1.5s',async ()=>{
-            render(<Home />);
+    it('Header showing',()=>{
+      render(
+     <Header />);
+      let header = screen.getByTestId('header');
+      expect(header).toBeInTheDocument();
+      const h1 = header.children[0];
+      expect(h1.innerHTML).toBe('Chomp');
+    })
+    it('carousel slides changes after 1.5s',()=>{
+        render(<Home />);
     
         let img = screen.getByTestId('carousel-imgs').children[0];
         expect(img.src).toBe(images[0].url);
