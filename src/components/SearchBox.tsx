@@ -21,7 +21,7 @@ export default function SearchBox(){
         let value = e.target.value;
         debouncedFetchResults(value);
     }
-   async  function fetchResults(searchText:string){
+    async  function fetchResults(searchText:string){
     const Api_key = process.env.NEXT_PUBLIC_API_KEY
         try{
             const res = await fetch(`${urls.autocomplete}?number=10&query=${searchText}`,{
@@ -38,7 +38,7 @@ export default function SearchBox(){
         }
     }
    
-    return <section className="absolute z-10 top-[45%] left-[40%] w-96">
+    return <section className="absolute z-10 top-[45%] left-[40%] w-96" data-testid="search-box">
         <input type="text" className="w-full h-10" placeholder="Search Recipe" onChange={changeInput} />
         
         {
