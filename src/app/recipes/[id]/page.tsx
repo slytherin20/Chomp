@@ -1,15 +1,17 @@
 import { urls } from "../../../../endpoints";
 import Error from "./error";
+import {  extendedIng, Recipe, RecipeInfo } from "./Recipe.interfaces";
 export default async function RecipeInformation({params}:{params:{id:string}}){
     let {id} = await params;
     let api = process.env.NEXT_PUBLIC_API_KEY
     let res = await fetch(`${urls.recipe}/${id}/information`,{
         headers:{
-            'x-api-key':`${api}`
+            'x-api-key':`${api}567`
         }
     });
-    let info = await res.json();
-    if(info.status && info.status!=200) return <Error error={info} />
+    let info:RecipeInfo= await res.json();
+    
+    if(info.code && info.code!=200) return <Error error={info} />
     return <main className="recipe-page pt-16 text-center m-8">
         <h1 className="text-4xl">{info.title}</h1>
         <ul className="cuisines-list m-4">
@@ -58,7 +60,7 @@ export default async function RecipeInformation({params}:{params:{id:string}}){
                 <h2 className="text-xl b">Ingredients:</h2>
                 <ul>
                     {
-                        info.extendedIngredients.map((ing:{original:string,id:number})=> <li key={ing.id} className="list-disc">{ing.original}</li>)
+                        info.extendedIngredients.map((ing:extendedIng)=> <li key={ing.id} className="list-disc">{ing.original}</li>)
                     }
                 </ul>
             </section>

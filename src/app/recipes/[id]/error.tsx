@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect } from "react";
+import { errorRes } from "./Recipe.interfaces";
 
-export default function Error({error}:{error:Error}){
+export default function Error({error}:{error:errorRes}){
 
     useEffect(()=>{
         console.log(error)
