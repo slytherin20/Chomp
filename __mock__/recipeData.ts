@@ -1,3 +1,5 @@
+import { errorRes } from "@/app/recipes/[id]/Recipe.interfaces"
+
 export const recipeInfo = {
     "vegetarian": true,
     "vegan": false,
@@ -1090,4 +1092,10 @@ export const recipeInfo = {
     "originalId": null,
     "spoonacularScore": 43.33047866821289,
     "spoonacularSourceUrl": "https://spoonacular.com/curried-red-kidney-beans-with-paneer-paneer-rajma-593415"
+}
+
+export const errorMsg:errorRes={
+    code:401,
+    status:"failure",
+    message:"Unauthorized access to the api"
 }

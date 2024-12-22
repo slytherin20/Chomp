@@ -1,15 +1,15 @@
 const { render,screen } = require("@testing-library/react")
-import { recipeInfo } from "../__mock__/recipeData";
+import { errorMsg, recipeInfo } from "../__mock__/recipeData";
 import RecipeInformation from "../src/app/recipes/[id]/page"
 import '@testing-library/jest-dom'
 describe('Recipe Page',()=>{
-    global.fetch = jest.fn(()=>{
-        return Promise.resolve({
-            json: ()=>Promise.resolve(recipeInfo)
-        })
-    })
-        
+    
     it("recipe information is displayed",async ()=>{
+        global.fetch = jest.fn(()=>{
+            return Promise.resolve({
+                json: ()=>Promise.resolve(recipeInfo)
+            })
+        })
         let props={
             params:{id:593415}
         }
@@ -33,5 +33,20 @@ describe('Recipe Page',()=>{
         expect(ing.children.length).toBe(23)
         let instructions = screen.getByTestId('recp-instructions');
         expect(instructions).toBeInTheDocument();
+    })
+    it("error message is displayed",async ()=>{
+        global.fetch = jest.fn(()=>{
+            return Promise.resolve({
+                json: ()=>Promise.resolve(errorMsg)
+            })
+        })
+        let props={
+            params:{id:"fytf"}
+        }
+        let Page =await RecipeInformation(props);
+        render(Page);
+        let err = screen.getByTestId("error-msg");
+        expect(err).toBeInTheDocument();
+        expect(err.innerHTML).toBe("Error Fetching Recipe info")
     })
 })

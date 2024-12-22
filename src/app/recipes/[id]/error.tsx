@@ -8,5 +8,5 @@ export default function Error({error}:{error:errorRes}){
     useEffect(()=>{
         console.log(error)
     },[error])
-    return <article className="text-4xl pt-56">Error Fetching Recipe info</article>
+    return <article className="text-4xl pt-56" data-testid="error-msg">Error Fetching Recipe info</article>
 }

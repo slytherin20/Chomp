@@ -8,7 +8,7 @@ export default async function RecipeInformation({params}:{params:{id:string}}){
     let api = process.env.NEXT_PUBLIC_API_KEY
     let res = await fetch(`${urls.recipe}/${id}/information`,{
         headers:{
-            'x-api-key':`${api}567`
+            'x-api-key':`${api}`
         }
     });
     let info:RecipeInfo= await res.json();
